@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>滴滴开源平台</title>
+	<meta charset="utf-8">
+	<link href="//cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bundle.js"></script>
+	<link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/frameworks-4ba00b1aa0227e4b7a7961544c3b7938afb2720757a471735991ec4475c829e0.css" integrity="sha256-S6ALGqAifkt6eWFUTDt5OK+ycgdXpHFzWZHsRHXIKeA=" media="all" rel="stylesheet" />
+	<link crossorigin="anonymous" href="https://assets-cdn.github.com/assets/github-81684fd7510dbd0631cf199316b86c30d3741f8600001e7998ec8ec766d6423c.css" integrity="sha256-gWhP11ENvQYxzxmTFrhsMNN0H4YAAB55mOyOx2bWQjw=" media="all" rel="stylesheet" />
+	<style>
+		.markdown-body h1 {
+			padding-bottom: 0.3em;
+			font-size: 24px;
+			border-bottom: 0px solid #eaecef !important;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="header-own">
+		<div class="header-inner container">
+			<a href="http://www.didichuxing.com/">
+				<img class="logo" src="images/open-source.png">
+			</a>
+			<div class="github-btn">
+				<a href="https://github.com/didi">View On GitHub</a>
+			</div>
+		</div>
+	</div>
+	<div class="sub-banner">
+		<img src="/images/virtual-apk.png" />
+	</div>
+	<div class="container sub-container">
+		<div class="head-title">
+			VirtualAPK
+			<div class="head-button">
+				<a href="https://github.com/didi/VirtualAPK">点击查看项目源码</a>
+			</div>
+		</div>
+		<div class="sub-line"></div>
+		<div class="sub-content">
+			<div id="wiki-body" class="wiki-body gollum-markdown-content instapaper_body">
+				<div class="markdown-body">
+					<p>VirtualAPK是滴滴出行自研的一款优秀的插件化框架，通过将业务模块插件化，可随时更新插件来发布新功能，具备版本随时发布的能力。</p>
+					<h1>
+						<a id="user-content-virtualapk的特性" class="anchor" aria-hidden="true"></a>VirtualAPK的特性</h1>
+					<h3>
+						<a id="user-content-功能完备" class="anchor" aria-hidden="true"></a>功能完备</h3>
+					<ul>
+						<li>支持几乎所有的Android特性；</li>
+						<li>四大组件方面</li>
+					</ul>
+					<p><strong>四大组件均不需要在宿主manifest中预注册，每个组件都有完整的生命周期。</strong></p>
+					<ol>
+						<li>Activity：支持显示和隐式调用，支持Activity的<code>theme</code>和<code>LaunchMode</code>，支持透明主题；</li>
+						<li>Service：支持显示和隐式调用，支持Service的<code>start</code>、<code>stop</code>、<code>bind</code>和<code>unbind</code>，并支持跨进程bind插件中的Service；</li>
+						<li>Receiver：支持静态注册和动态注册的Receiver；</li>
+						<li>ContentProvider：支持provider的所有操作，包括<code>CRUD</code>和<code>call</code>方法等，支持跨进程访问插件中的Provider。</li>
+					</ol>
+					<ul>
+						<li>自定义View：支持<code>自定义View</code>，支持自定义属性和<code>style</code>，支持动画；</li>
+						<li>PendingIntent：支持<code>PendingIntent</code>以及和其相关的<code>Alarm</code>、<code>Notification</code>和<code>AppWidget</code>；</li>
+						<li>支持插件<code>Application</code>以及插件manifest中的<code>meta-data</code>；</li>
+						<li>支持插件中的<code>so</code>。</li>
+					</ul>
+					<h3>
+						<a id="user-content-优秀的兼容性" class="anchor" aria-hidden="true"></a>优秀的兼容性</h3>
+					<ul>
+						<li>兼容市面上几乎所有的Android手机，这一点已经在滴滴出行客户端中得到验证；</li>
+						<li>资源方面适配小米、Vivo、Nubia等，对未知机型采用自适应适配方案；</li>
+						<li>极少的Binder Hook，目前仅仅hook了两个Binder：<code>AMS</code>和<code>IContentProvider</code>，hook过程做了充分的兼容性适配；</li>
+						<li>插件运行逻辑和宿主隔离，确保框架的任何问题都不会影响宿主的正常运行。</li>
+					</ul>
+					<h3>
+						<a id="user-content-入侵性极低" class="anchor" aria-hidden="true"></a>入侵性极低</h3>
+					<ul>
+						<li>插件开发等同于原生开发，四大组件无需继承特定的基类；</li>
+						<li>精简的插件包，插件可以依赖宿主中的代码和资源，也可以不依赖；</li>
+						<li>插件的构建过程简单，通过Gradle插件来完成插件的构建，整个过程对开发者透明。</li>
+					</ul>
+					<h1>
+						<a id="user-content-virtualapk和主流开源框架的对比" class="anchor" aria-hidden="true"></a>VirtualAPK和主流开源框架的对比</h1>
+					<p>如下是VirtualAPK和主流的插件化框架之间的对比。</p>
+					<table>
+						<thead>
+							<tr>
+								<th>特性</th>
+								<th align="center">DynamicLoadApk</th>
+								<th align="center">DynamicAPK</th>
+								<th align="center">Small</th>
+								<th align="center">DroidPlugin</th>
+								<th align="center">VirtualAPK</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>支持四大组件</td>
+								<td align="center">只支持Activity</td>
+								<td align="center">只支持Activity</td>
+								<td align="center">只支持Activity</td>
+								<td align="center">全支持</td>
+								<td align="center">全支持</td>
+							</tr>
+							<tr>
+								<td>组件无需在宿主manifest中预注册</td>
+								<td align="center">√</td>
+								<td align="center">×</td>
+								<td align="center">√</td>
+								<td align="center">√</td>
+								<td align="center">√</td>
+							</tr>
+							<tr>
+								<td>插件可以依赖宿主</td>
+								<td align="center">√</td>
+								<td align="center">√</td>
+								<td align="center">√</td>
+								<td align="center">×</td>
+								<td align="center">√</td>
+							</tr>
+							<tr>
+								<td>支持PendingIntent</td>
+								<td align="center">×</td>
+								<td align="center">×</td>
+								<td align="center">×</td>
+								<td align="center">√</td>
+								<td align="center">√</td>
+							</tr>
+							<tr>
+								<td>Android特性支持</td>
+								<td align="center">大部分</td>
+								<td align="center">大部分</td>
+								<td align="center">大部分</td>
+								<td align="center">几乎全部</td>
+								<td align="center">几乎全部</td>
+							</tr>
+							<tr>
+								<td>兼容性适配</td>
+								<td align="center">一般</td>
+								<td align="center">一般</td>
+								<td align="center">中等</td>
+								<td align="center">高</td>
+								<td align="center">高</td>
+							</tr>
+							<tr>
+								<td>插件构建</td>
+								<td align="center">无</td>
+								<td align="center">部署aapt</td>
+								<td align="center">Gradle插件</td>
+								<td align="center">无</td>
+								<td align="center">Gradle插件</td>
+							</tr>
+						</tbody>
+					</table>
+					<h3>
+						<a id="user-content-为什么选择virtualapk" class="anchor" aria-hidden="true"></a>为什么选择VirtualAPK？</h3>
+					<p>已经有那么多优秀的开源的插件化框架，滴滴为什么要重新造一个轮子呢？</p>
+					<p><strong>1. 大部分开源框架所支持的功能还不够全面</strong> 除了DroidPlugin，大部分都只支持Activity。
+					</p>
+					<p><strong>2. 兼容性问题严重，大部分开源方案不够健壮</strong> 由于国内Rom尝试深度定制Android系统，这导致插件框架的兼容性问题特别多，而目前已有的开源方案中，除了DroidPlugin，其他方案对兼容性问题的适配程度是不足的。
+					</p>
+					<p><strong>3. 已有的开源方案不适合滴滴的业务场景</strong> 虽然说DroidPlugin从功能的完整性和兼容性上来看，是一款非常完善的插件框架，然而它的使用场景和滴滴的业务不符。
+					</p>
+					<p>DroidPlugin侧重于加载第三方独立插件，比如微信，并且插件不能访问宿主的代码和资源。而在滴滴打车中，其他业务模块均需要宿主提供的订单、定位、账号等数据，因此插件不可能和宿主没有交互。</p>
+					<p>其实在大部分产品中，一个业务模块实际上并不能轻而易举地独立出来，它们往往都会和宿主有交互，在这种情况下，DroidPlugin就有点力不从心了。</p>
+					<p>基于上述几点，我们只能重新造一个轮子，它不但功能全面、兼容性好，还必须能够适用于有耦合的业务插件，这就是VirtualAPK存在的意义。</p>
+					<p><strong>在加载耦合插件方面，VirtualAPK是开源方案的首选，推荐大家使用</strong>。</p>
+					<h4>
+						<a id="user-content-通俗易懂地说" class="anchor" aria-hidden="true"></a>通俗易懂地说</h4>
+					<ol>
+						<li>如果你是要加载微信、支付宝等第三方APP，那么推荐选择DroidPlugin；</li>
+						<li>如果你是要加载一个内部业务模块，并且这个业务模块很难从主工程中解耦，那么VirtualAPK是最好的选择。</li>
+					</ol>
+					<h4>
+						<a id="user-content-抽象地说" class="anchor" aria-hidden="true"></a>抽象地说</h4>
+					<ol>
+						<li>如果你要加载一个插件，并且这个插件无需和宿主有任何耦合，也无需和宿主进行通信，并且你也不想对这个插件重新打包，那么推荐选择DroidPlugin；</li>
+						<li>除此之外，在同类的开源中，推荐大家选择VirtualAPK。</li>
+					</ol>
+					<h1>
+						<a id="user-content-virtualapk的工作过程" class="anchor" aria-hidden="true"></a>VirtualAPK的工作过程</h1>
+					<p>VirtualAPK对插件没有额外的约束，原生的apk即可作为插件。插件工程编译生成apk后，即可通过宿主App加载，每个插件apk被加载后，都会在宿主中创建一个单独的LoadedPlugin对象。如下图所示，通过这些LoadedPlugin对象，VirtualAPK就可以管理插件并赋予插件新的意义，使其可以像手机中安装过的App一样运行。
+						<img src="./images/virtual-1.png" alt="VirtualAPK"></p>
+					<h3>
+						<a id="user-content-如何使用" class="anchor" aria-hidden="true"></a>如何使用</h3>
+					<p>第一步： 初始化插件引擎</p>
+					<pre><code>@Override
+protected void attachBaseContext(Context base) {
+    super.attachBaseContext(base);
+    PluginManager.getInstance(base).init();
+}
+</code></pre>
+					<p>第二步：加载插件</p>
+					<pre><code>public class PluginManager {
+    public void loadPlugin(File apk);
+}
+</code></pre>
+					<p><strong>当插件入口被调用后，插件的后续逻辑均不需要宿主干预，均走原生的Android流程。</strong> 比如，在插件内部，如下代码将正确执行：
+					</p>
+					<pre><code>@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_book_manager);
+    LinearLayout holder = (LinearLayout)findViewById(R.id.holder);
+    TextView imei = (TextView)findViewById(R.id.imei);
+    imei.setText(IDUtil.getUUID(this));
+
+    // bind service in plugin
+    Intent service = new Intent(this, BookManagerService.class);
+    bindService(service, mConnection, Context.BIND_AUTO_CREATE);
+
+    // start activity in plugin
+    Intent intent = new Intent(this, TCPClientActivity.class);
+    startActivity(intent);
+}
+</code></pre>
+					<h1>
+						<a id="user-content-探究原理" class="anchor" aria-hidden="true"></a>探究原理</h1>
+					<h3>
+						<a id="user-content-基本原理" class="anchor" aria-hidden="true"></a>基本原理</h3>
+					<ul>
+						<li>
+							<strong>合并宿主和插件的ClassLoader</strong> 需要注意的是，插件中的类不可以和宿主重复
+						</li>
+						<li>
+							<strong>合并插件和宿主的资源</strong> 重设插件资源的packageId，将插件资源和宿主资源合并
+						</li>
+						<li>
+							<strong>去除插件包对宿主的引用</strong> 构建时通过Gradle插件去除插件对宿主的代码以及资源的引用
+						</li>
+					</ul>
+					<h3>
+						<a id="user-content-四大组件的实现原理" class="anchor" aria-hidden="true"></a>四大组件的实现原理</h3>
+					<ul>
+						<li>
+							<strong>Activity</strong> 采用宿主manifest中占坑的方式来绕过系统校验，然后再加载真正的activity；
+						</li>
+						<li>
+							<strong>Service</strong> 动态代理AMS，拦截service相关的请求，将其中转给
+							<code>Service Runtime</code>去处理，<code>Service Runtime</code>会接管系统的所有操作；</li>
+						<li>
+							<strong>Receiver</strong> 将插件中静态注册的receiver重新注册一遍；
+						</li>
+						<li>
+							<strong>ContentProvider</strong> 动态代理IContentProvider，拦截provider相关的请求，将其中转给
+							<code>Provider Runtime</code>去处理，<code>Provider Runtime</code>会接管系统的所有操作。</li>
+					</ul>
+					<p>如下是VirtualAPK的整体架构图，更详细的内容请大家<a href="https://github.com/didi/VirtualAPK">阅读源码</a>。</p>
+					<p><img src="./images/virtual-2.jpeg" alt="VirtualAPK"></p>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="container">
+			<p>
+				<a href="http://www.apache.org/licenses/LICENSE-2.0.html">开源协议</a> <span class="liscens">|</span> <a href="mailto:opensource@didichuxing.com">反馈意见</a>
+			</p>
+			<p class="liscens">© 2012-2017 Didi Chuxing. All Rights Reserved</p>
+		</div>
+	</div>
+</body>
+
+</html>
